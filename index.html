@@ -1,40 +1,33 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | 1</title>
-  </head>
-  <body style="text-align: center; padding: 0; border: 0; margin: 0;">
-    <canvas id="unity-canvas" width=960 height=600 style="width: 960px; height: 600px; background: #231F20"></canvas>
-    <script src="Build/Artifact%20Information%203D%20Visualization%20.loader.js"></script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Interactive WebGL</title>
+    <!-- 引用重命名后的 Loader.js 脚本文件 -->
+    <script src="Loader.js"></script>
+</head>
+<body>
+    <!-- 游戏容器 -->
+    <div id="gameContainer" style="width: 960px; height: 600px; background: #000;"></div>
     <script>
-      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        // Mobile device style: fill the whole browser client area with the game canvas:
-        var meta = document.createElement('meta');
-        meta.name = 'viewport';
-        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
-        document.getElementsByTagName('head')[0].appendChild(meta);
+        var container = document.getElementById('gameContainer');
+        var config = {
+            // 在这里添加你的配置
+        };
 
-        var canvas = document.querySelector("#unity-canvas");
-        canvas.style.width = "100%";
-        canvas.style.height = "100%";
-        canvas.style.position = "fixed";
-
-        document.body.style.textAlign = "left";
-      }
-
-      createUnityInstance(document.querySelector("#unity-canvas"), {
-        dataUrl: "Build/Artifact%20Information%203D%20Visualization%20.data",
-        frameworkUrl: "Build/Artifact%20Information%203D%20Visualization%20.framework.js",
-        codeUrl: "Build/Artifact%20Information%203D%20Visualization%20.wasm",
-        streamingAssetsUrl: "StreamingAssets",
-        companyName: "DefaultCompany",
-        productName: "1",
-        productVersion: "0.1",
-        // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
-        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
-      });
+        if (typeof createUnityInstance !== 'undefined') {
+            createUnityInstance(container, config, (progress) => {
+                // 在这里添加你的代码
+                console.log('Loading progress:', progress);
+            }).then((unityInstance) => {
+                console.log('Unity instance created:', unityInstance);
+            }).catch((message) => {
+                console.error('Error creating Unity instance:', message);
+            });
+        } else {
+            console.error('createUnityInstance is not defined. Make sure Loader.js is loaded correctly.');
+        }
     </script>
-  </body>
+</body>
 </html>
