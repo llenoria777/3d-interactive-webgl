@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3D Interactive WebGL</title>
-    <!-- 引用重命名后的 Loader.js 脚本文件 -->
+    <!-- 引用 Loader.js 脚本文件 -->
     <script src="Loader.js"></script>
 </head>
 <body>
@@ -16,13 +16,12 @@
             companyName: "YourCompanyName",
             productName: "YourProductName",
             productVersion: "1.0",
-            streamingAssetsUrl: "path/to/your/assets",
-            // 添加其他必要的配置
+            streamingAssetsUrl: "StreamingAssets",
+            // 其他配置选项根据需要添加
         };
 
         if (typeof createUnityInstance !== 'undefined') {
             createUnityInstance(container, config, (progress) => {
-                // 在这里添加你的代码
                 console.log('Loading progress:', progress);
             }).then((unityInstance) => {
                 console.log('Unity instance created:', unityInstance);
